@@ -1,15 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.VR;
 
-public class TouchSensingScript : MonoBehaviour {
+public class NoteButton : MonoBehaviour {
 
-	BoxCollider bc;
+	private SymbolRecordManager srm;
 
 	// Use this for initialization
 	void Start () {
-		bc = GetComponent<BoxCollider> ();
+		srm = FindObjectOfType<SymbolRecordManager> ();
 	}
 	
 	// Update is called once per frame
@@ -18,6 +17,9 @@ public class TouchSensingScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		
+		if (srm.IsRecording ()) {
+			print ("ADDING");
+			srm.AddToNewRecording(gameObject.name);
+		}
 	}
 }
