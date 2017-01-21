@@ -28,3 +28,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+EGD1Game/EGD1/Library/*
+EGD1Game/EGD1/Temp/*
+EGD1Game/EGD1/obj/*
+EGD1Game/EGD1/builds/*
