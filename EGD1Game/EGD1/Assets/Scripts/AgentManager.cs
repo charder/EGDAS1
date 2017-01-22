@@ -7,6 +7,14 @@ public class AgentManager : MonoBehaviour {
     public float mutationRate = 0.0f;
     public int memorySize = 5;
 
+    public GameObject Bell;
+    public GameObject Diamond;
+    public GameObject Flame;
+    public GameObject Lightning;
+    public GameObject Heart;
+    public GameObject Spade;
+    public GameObject Star;
+
     List<ArrayList> memory = new List<ArrayList>();
 
 	// Use this for initialization
@@ -54,6 +62,13 @@ public class AgentManager : MonoBehaviour {
 
         // Add code to really play it, now just outputs pattern
         DebugPlay(pattern);
+    }
+
+    // Handler for AI touching given note
+    void TouchNote(GameObject InNote)
+    {
+        NoteButton Note = (NoteButton)InNote.GetComponent(typeof(NoteButton));
+        Note.TouchByAI();
     }
 
     void DebugPlay(ArrayList pattern) {

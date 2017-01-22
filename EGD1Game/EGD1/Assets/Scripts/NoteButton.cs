@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class NoteButton : MonoBehaviour {
 
+    public AudioClip SoundToPlay;
 	private SymbolRecordManager srm;
 
 	private float spinSpeed = 720f;
@@ -41,6 +42,11 @@ public class NoteButton : MonoBehaviour {
 			animating = true;
 		}
 	}
+
+    public void TouchByAI()
+    {
+        animating = true;
+    }
 
 	void animate(){
 		totalRotationSoFar += Time.deltaTime * spinSpeed;
