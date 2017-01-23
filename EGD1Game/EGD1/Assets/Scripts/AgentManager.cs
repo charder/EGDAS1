@@ -9,11 +9,12 @@ public class AgentManager : MonoBehaviour {
 
     public GameObject Bell;
     public GameObject Diamond;
-    public GameObject Flame;
+    public GameObject Cloud;
     public GameObject Lightning;
     public GameObject Heart;
     public GameObject Spade;
     public GameObject Star;
+	public GameObject HighBell;
 
     List<ArrayList> memory = new List<ArrayList>();
 
