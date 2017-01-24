@@ -2,13 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteButton : MonoBehaviour {
-
-	public AudioSource AS;
-
-	public AudioClip FlatNote;
-    public AudioClip BaseNote;
-	public AudioClip SharpNote;
+public class sharpflat : MonoBehaviour {
 
 	private SymbolRecordManager srm;
 
@@ -19,18 +13,15 @@ public class NoteButton : MonoBehaviour {
 	private float totalRotationSoFar = 0f;
 	private Vector3 defaultRotation;
 
-	private sharpflat sharp;
-	private sharpflat flat;
+	public GameObject other;
+	public bool active = false;
 
 	// Use this for initialization
 	void Start () {
-		AS = GetComponent<AudioSource> ();
 		srm = FindObjectOfType<SymbolRecordManager> ();
 		defaultRotation = transform.localEulerAngles;
-		sharp = GameObject.Find ("Sharp").GetComponent<sharpflat>();
-		flat = GameObject.Find("Flat").GetComponent<sharpflat>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (animating) {
@@ -45,20 +36,21 @@ public class NoteButton : MonoBehaviour {
 	public void Trigger(){
 		if (srm.IsRecording ()) {
 			print ("ADDING");
-			srm.AddToNewRecording(gameObject.name);
+			srm.AddToNewRecording (gameObject.name);
 			animating = true;
-			PlayNote ();
-		}
-		else if (srm.IsPlaying()) {
+			active = !active;
+			if (other.GetComponent<sharpflat> ().active) {
+				other.GetComponent<sharpflat> ().active = false;
+			}
+		} else if (srm.IsPlaying ()) {
 			animating = true;
-			PlayNote ();
 		}
 	}
 
-    public void TouchByAI()
-    {
-        animating = true;
-    }
+	public void TouchByAI()
+	{
+		animating = true;
+	}
 
 	void animate(){
 		totalRotationSoFar += Time.deltaTime * spinSpeed;
@@ -69,18 +61,5 @@ public class NoteButton : MonoBehaviour {
 		} else {
 			transform.localEulerAngles = new Vector3 (defaultRotation.x + totalRotationSoFar, defaultRotation.y, defaultRotation.z);
 		}
-	}
-
-	public void PlayNote(){
-		AudioClip theOne = BaseNote;
-		if (flat.active) {
-			theOne = FlatNote;
-			flat.active = false;
-		} else if (sharp.active) {
-			theOne = SharpNote;
-			sharp.active = false;
-		}
-		AS.clip = theOne;
-		AS.Play ();
 	}
 }

@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RecordButtonScript : MonoBehaviour {
-
+public class PlayButtonScript : MonoBehaviour {
+	
 	private SymbolRecordManager srm;
 
-	public PlayButtonScript player;
+	public RecordButtonScript recorder;
 
 	// Use this for initialization
 	void Start () {
@@ -19,10 +19,10 @@ public class RecordButtonScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if (srm.IsRecording ()) {
-			srm.StopRecording ();
-		} else if(!srm.IsRecording() && !srm.IsPlaying()){
-			srm.StartRecording ();
+		if (srm.IsPlaying ()) {
+			
+		} else {
+			srm.PlayRandom();
 		}
 	}
 }
